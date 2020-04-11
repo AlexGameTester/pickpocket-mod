@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ca673ef-4a85-452c-b498-ef29ffac1041" name="Default Changelist" comment="" />
+    <list default="true" id="1ca673ef-4a85-452c-b498-ef29ffac1041" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/Pickpocket_1.15.2_git.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/Pickpocket_1.15.2_git.test.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/capability/pickpocket/PickpocketPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/Pickpocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/Pickpocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/capabilitypickpocket/IPickpocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/capability/pickpocket/IPickpocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/CapabilityAttachingEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/CapabilityAttachingEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/VillagerInteractionEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/VillagerInteractionEvent.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,10 +35,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aOHMdSQQh8DYZeqpuPbNYiJKiJ" />
   <component name="ProjectViewState">
@@ -28,6 +51,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Application.runClient">
@@ -55,10 +79,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586600827977" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1586610253735">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1586634584636">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586610253735" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586634584636" />
     <state x="808" y="409" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586599874217">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -67,50 +91,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586615926989" />
-    <state x="677" y="168" key="#runClient" timestamp="1586600776049">
+    <state x="677" y="168" key="#runClient" timestamp="1586634829221">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="677" y="168" key="#runClient/0.0.1920.1040@0.0.1920.1040" timestamp="1586600776049" />
-    <state width="1877" height="330" key="GridCell.Tab.0.bottom" timestamp="1586617241808">
+    <state x="677" y="168" key="#runClient/0.0.1920.1040@0.0.1920.1040" timestamp="1586634829221" />
+    <state width="1877" height="330" key="GridCell.Tab.0.bottom" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.0.center" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.0.center" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.0.left" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.0.left" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.0.right" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.0.right" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.1.bottom" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.1.bottom" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.1.center" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.1.center" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.1.left" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.1.left" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
-    <state width="1877" height="330" key="GridCell.Tab.1.right" timestamp="1586617241808">
+    <state width="1877" height="330" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
+    <state width="1877" height="330" key="GridCell.Tab.1.right" timestamp="1586635189529">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="330" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586617241808" />
+    <state width="1877" height="330" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586635189529" />
     <state x="681" y="261" width="570" height="524" key="StructurePopup" timestamp="1586608784779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="681" y="261" width="570" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1586608784779" />
-    <state width="711" height="283" key="javadoc.popup.new" timestamp="1586616500906">
+    <state x="551" y="162" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1586634856495">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="711" height="283" key="javadoc.popup.new/0.0.1920.1040@0.0.1920.1040" timestamp="1586616500906" />
+    <state x="551" y="162" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1586634856495" />
+    <state width="711" height="283" key="javadoc.popup.new" timestamp="1586633687776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="711" height="283" key="javadoc.popup.new/0.0.1920.1040@0.0.1920.1040" timestamp="1586633687776" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1586614083605">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -121,13 +149,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/CapabilityAttachingEvent.java</url>
-          <line>28</line>
+          <line>30</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/elexyr/pickpocket/event/CapabilityAttachingEvent.java</url>
-          <line>25</line>
-          <properties class="elexyr.pickpocket.event.CapabilityAttachingEvent" method="villagerCapabilitiesEventHandler">
+          <line>27</line>
+          <properties class="elexyr.pickpocket.event.CapabilityAttachingEvent">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="2" />

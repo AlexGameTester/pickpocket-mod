@@ -1,4 +1,4 @@
-package elexyr.pickpocket.capabilitypickpocket;
+package elexyr.pickpocket.capability.pickpocket;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -6,11 +6,12 @@ import net.minecraft.item.Rarity;
 import java.util.List;
 
 public interface IPickpocket {
-    double getStealingSkills();
-    void setStealingSkill(double value);
+    float getStealingSkills();
+    void setStealingSkill(float value);
     void updateSkillsFromStolenStacks(List<ItemStack> stolenStacks);
+    void addStealingSkill(float value);
 
-    public static double getSkillMultiplier(Rarity rarity, double skill) {
+    public static double getSkillMultiplier(Rarity rarity, float skill) {
         //If your skill is high you gain less experience from stealing common items
         switch (rarity) {
             case COMMON:

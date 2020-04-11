@@ -78,7 +78,7 @@ public class VillagerInteractionEvent {
                             ChestContainer container = ChestContainer.createGeneric9X2(p1, p2);
                             //TODO: What if length of the list is bigger than container slots number
                             container.setAll(villagerSellingStacks);
-                            Pickpocket.LOGGER.info("If chest container can interact with player: " + container.canInteractWith(event.getPlayer()));
+//                            Pickpocket.LOGGER.info("If chest container can interact with player: " + container.canInteractWith(event.getPlayer()));
                             return container;
                         },
                         new TranslationTextComponent("container.villager_offers")));
