@@ -17,7 +17,7 @@ public class CapabilityPocketOwner {
     public static void register() {
         CapabilityManager.INSTANCE.register(IPocketOwner.class,
                 new Capability.IStorage<IPocketOwner>() {
-                    @Nullable
+
                     @Override
                     public INBT writeNBT(Capability<IPocketOwner> capability, IPocketOwner instance, Direction side) {
                         CompoundNBT nbt = new CompoundNBT();

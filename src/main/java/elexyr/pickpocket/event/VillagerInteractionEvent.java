@@ -8,6 +8,7 @@ import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.state.properties.BedPart;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
@@ -58,7 +60,9 @@ public class VillagerInteractionEvent {
 
             List<VillagerEntity> sleepingVillagers = world.getEntitiesWithinAABB(VillagerEntity.class, new AxisAlignedBB(headPos), LivingEntity::isSleeping);
 
-            if (!sleepingVillagers.isEmpty() && event.getPlayer().isShiftKeyDown()) {
+            PlayerEntity player = event.getPlayer();
+
+            if (!sleepingVillagers.isEmpty() && player.isShiftKeyDown()) {
                 VillagerEntity villagerEntity = sleepingVillagers.get(0);
                 /*
                 StringBuilder stringBuilder = new StringBuilder();
@@ -68,11 +72,11 @@ public class VillagerInteractionEvent {
                 });
                 stringBuilder.append("].");
                 */
-                checkCapability(villagerEntity);
+                checkCapability(villagerEntity, player);
 
                 List<ItemStack> villagerSellingStacks = VillagerUtils.getSellingStacks(villagerEntity);
 //                event.getPlayer().sendStatusMessage(new StringTextComponent(stringBuilder.toString()), false);
-                event.getPlayer().openContainer(new SimpleNamedContainerProvider(
+                player.openContainer(new SimpleNamedContainerProvider(
                         //Don't know what these parameters mean. From EnderChestTileEntity
                         (p1, p2, p3) -> {
                             ChestContainer container = ChestContainer.createGeneric9X2(p1, p2);
@@ -82,15 +86,19 @@ public class VillagerInteractionEvent {
                             return container;
                         },
                         new TranslationTextComponent("container.villager_offers")));
-                event.getPlayer().setSneaking(true);
+                player.setSneaking(true);
                 event.setUseBlock(Event.Result.DENY);
             }
         }
     }
 
-    private static void checkCapability(VillagerEntity villagerEntity) {
+    private static void checkCapability(VillagerEntity villagerEntity, PlayerEntity playerEntity) {
         LazyOptional<IPocketOwner> capability = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_HANDLER_CAPABILITY);
         if (capability.isPresent()) {
+            capability.ifPresent(cap -> {
+                cap.addRobbery();
+                playerEntity.sendStatusMessage(new StringTextComponent(String.format("This villager has been robbed %d times", cap.getRobberiesCount())), false);
+            });
             Pickpocket.LOGGER.info("Villager has capability");
         }
         else {
