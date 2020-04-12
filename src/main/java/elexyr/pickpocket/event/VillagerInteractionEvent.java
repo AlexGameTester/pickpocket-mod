@@ -93,7 +93,7 @@ public class VillagerInteractionEvent {
     }
 
     private static void checkCapability(VillagerEntity villagerEntity, PlayerEntity playerEntity) {
-        LazyOptional<IPocketOwner> capability = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_HANDLER_CAPABILITY);
+        LazyOptional<IPocketOwner> capability = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY);
         if (capability.isPresent()) {
             capability.ifPresent(cap -> {
                 cap.addRobbery();

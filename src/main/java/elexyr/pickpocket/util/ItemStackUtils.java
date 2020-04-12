@@ -5,9 +5,10 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CommonUtils {
+public class ItemStackUtils {
     //TODO: Isn't this too complicated
     public static List<ItemStack> differenceBetween(List<ItemStack> bigger, List<ItemStack> smaller) {
         ArrayList<ItemStack> difference = new ArrayList<>();
@@ -28,13 +29,12 @@ public class CommonUtils {
     }
 
     public static List<ItemStack> sum(List<ItemStack> list1, List<ItemStack> list2) {
-        //Creates copy of list1 with copies of stacks
-        ArrayList<ItemStack> sum = list1.stream().map(ItemStack::copy).collect(Collectors.toCollection(ArrayList::new));
-        for(ItemStack stack2 : list2) {
-            }
-        }
+        List<ItemStack> sumList = copyList(list1);
+        sumList.addAll(list2);
+        return mergeEqualItems(sumList);
     }
 
+    /*
     private static int indexOfItem(ItemStack stack, List<ItemStack> list) {
         int index = -1;
         if (stack.isEmpty()) {
@@ -47,13 +47,24 @@ public class CommonUtils {
         }
     }
 
-    public List<ItemStack> mergeEqualItems(List<ItemStack> list) {
-        List<ItemStack> mergedList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i + 1; j < list.size(); j++) {
+     */
+    public static List<ItemStack> mergeEqualItems(List<ItemStack> list) {
+        List<ItemStack> listCopy = copyList(list);
+        for (int i = 0; i < listCopy.size(); i++) {
+            for (int j = i + 1; j < listCopy.size(); j++) {
                 //TODO: Should use this comparison method
-                if (ItemStack.areItemStackTagsEqual(list.get(i), list.get(j)))
+                if (ItemStack.areItemStackTagsEqual(listCopy.get(i), listCopy.get(j))) {
+                    listCopy.get(i).setCount(listCopy.get(i).getCount() + listCopy.get(j).getCount());
+                    listCopy.remove(j);
+                }
             }
         }
+
+        return listCopy;
     }
+
+    private static List<ItemStack> copyList(List<ItemStack> list) {
+        return list.stream().map(ItemStack::copy).collect(Collectors.toList());
+    }
+
 }

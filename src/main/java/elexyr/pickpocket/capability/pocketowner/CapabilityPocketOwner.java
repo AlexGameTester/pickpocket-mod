@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 public class CapabilityPocketOwner {
 
     @CapabilityInject(IPocketOwner.class)
-    public static Capability<IPocketOwner> POCKET_HANDLER_CAPABILITY = null;
+    public static Capability<IPocketOwner> POCKET_OWNER_CAPABILITY = null;
 
     public static void register() {
         CapabilityManager.INSTANCE.register(IPocketOwner.class,
