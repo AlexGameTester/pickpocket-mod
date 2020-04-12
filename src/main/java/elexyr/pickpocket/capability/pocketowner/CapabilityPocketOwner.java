@@ -22,7 +22,7 @@ public class CapabilityPocketOwner {
                     public INBT writeNBT(Capability<IPocketOwner> capability, IPocketOwner instance, Direction side) {
                         CompoundNBT nbt = new CompoundNBT();
                         nbt.putInt("robberies_count", instance.getRobberiesCount());
-                        //TODO: Also write items to nbt
+                        //TODO: Also write items to nbt. Maybe it's better to use dictionary of (ItemStack of 1 item, number of items of this type stolen)
                         return nbt;
                     }
 

@@ -80,12 +80,12 @@ public class VillagerInteractionEvent {
                         //Don't know what these parameters mean. From EnderChestTileEntity
                         (p1, p2, p3) -> {
                             ChestContainer container = ChestContainer.createGeneric9X2(p1, p2);
-                            //TODO: What if length of the list is bigger than container slots number
+                            //TODO: What if length of the list is bigger than container slots number - vanilla maximum amount of trades = 10
                             container.setAll(villagerSellingStacks);
 //                            Pickpocket.LOGGER.info("If chest container can interact with player: " + container.canInteractWith(event.getPlayer()));
                             return container;
                         },
-                        new TranslationTextComponent("container.villager_offers")));
+                        new TranslationTextComponent("container.villager_pocket")));
                 player.setSneaking(true);
                 event.setUseBlock(Event.Result.DENY);
             }
