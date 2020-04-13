@@ -17,11 +17,11 @@ public class AgilityUtils {
     private static final float ATTENTIVENESS_PER_ROBBERY = 1F;
     private static final float ATTENTIVENESS_PER_LEVEL = 1f;
 
-    public static float getProbabilityForStack(Inventory playerInventory, LazyOptional<IPickpocket> userCap, LazyOptional<IPocketOwner> targetCap, ItemStack stack, AbstractVillagerEntity) {}
+//    public static float getProbabilityForStack(Inventory playerInventory, LazyOptional<IPickpocket> userCap, LazyOptional<IPocketOwner> targetCap, ItemStack stack, AbstractVillagerEntity) {}
 
     private static float calculateVillagerAttentiveness(PlayerEntity player, VillagerEntity villager, LazyOptional<IPocketOwner> capability) {
         VillagerData data = villager.getVillagerData();
-        //TODO: What if reputation is zero - zero dision
+        //TODO: What if reputation is zero - zero division
         return data.getLevel() * ATTENTIVENESS_PER_LEVEL * (1f / (float)villager.getPlayerReputation(player)) * calculateAttentiveness(villager.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY));
     }
 
