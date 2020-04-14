@@ -7,17 +7,11 @@ import java.util.List;
 
 public class VillagerPocketOwner implements IPocketOwner {
 
-    private final ArrayList<ItemStack> items = new ArrayList<>();
     private int robberiesCount = 0;
 
     @Override
     public int getRobberiesCount() {
         return robberiesCount;
-    }
-
-    @Override
-    public List<ItemStack> getStolenItems() {
-        return items;
     }
 
     @Override
@@ -30,7 +24,7 @@ public class VillagerPocketOwner implements IPocketOwner {
     }
 
     @Override
-    public void addStolenItems(List<ItemStack> newStolen) {
-        items.addAll(newStolen);
+    public void addRobbery() {
+        robberiesCount++;
     }
 }

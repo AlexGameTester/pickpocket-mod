@@ -1,6 +1,5 @@
 package elexyr.pickpocket.capability.pickpocket;
 
-import elexyr.pickpocket.Pickpocket;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -22,7 +21,7 @@ public class CapabilityPickpocket {
                     @Override
                     public INBT writeNBT(Capability<IPickpocket> capability, IPickpocket instance, Direction side) {
                         CompoundNBT nbt = new CompoundNBT();
-                        nbt.putFloat("pickpocket_skill", instance.getStealingSkills());
+                        nbt.putFloat("pickpocket_skill", instance.getSkill());
                         return nbt;
                     }
 

@@ -10,7 +10,7 @@ public class PickpocketPlayer implements IPickpocket {
     private float skill = 1;
 
     @Override
-    public float getStealingSkills() {
+    public float getSkill() {
         return 0;
     }
 
@@ -22,7 +22,7 @@ public class PickpocketPlayer implements IPickpocket {
     }
 
     @Override
-    public void addStealingSkill(float value) {
+    public void addSkill(float value) {
         if (skill + value < 0) {
             throw new IllegalArgumentException("Skill must be bigger than 0. You can't add value of " + value + " to current skill of " + skill);
         }
@@ -38,6 +38,6 @@ public class PickpocketPlayer implements IPickpocket {
                 skillToAdd += IPickpocket.getSkillMultiplier(stack.getRarity(), skill) * stack.getCount();
             }
         }
-        addStealingSkill(skillToAdd);
+        addSkill(skillToAdd);
     }
 }
