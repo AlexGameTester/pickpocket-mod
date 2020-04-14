@@ -26,7 +26,7 @@ public class AgilityUtils {
     }
 
     private static float calculateAttentiveness(LazyOptional<IPocketOwner> capability) {
-        //1 is set in case if capability is empty
+        //1 is set in case if capability is empty or there were no robberies
         final float[] attentiveness = {1};
         if (!capability.isPresent()) {
             Pickpocket.LOGGER.warn("Can't find PocketOwner capability of villager.");
