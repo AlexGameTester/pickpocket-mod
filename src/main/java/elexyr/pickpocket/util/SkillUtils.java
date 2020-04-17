@@ -2,6 +2,7 @@ package elexyr.pickpocket.util;
 
 import elexyr.pickpocket.Pickpocket;
 import elexyr.pickpocket.capability.pickpocket.IPickpocket;
+import elexyr.pickpocket.capability.pocketowner.CapabilityPocketOwner;
 import elexyr.pickpocket.capability.pocketowner.IPocketOwner;
 import net.minecraft.entity.merchant.villager.VillagerData;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
@@ -53,11 +54,12 @@ public class SkillUtils {
         });
     }
 
-    public static ItemStack getStolenStack(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, ItemStack stack, VillagerEntity villagerEntity) {
+    public static ItemStack getStolenStack(PlayerEntity playerEntity, ItemStack stack, VillagerEntity villagerEntity) {
         if (stack.isEmpty()) {
             return ItemStack.EMPTY.copy();
         }
 
+        LazyOptional<IPocketOwner> targetCap = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY);
         float count = (float) ((float) stack.getCount() *
                                 (1 - Math.exp(1 /
                                         getRarityMultiplier(stack.getRarity()) * probabilityModifier(playerEntity, targetCap, villagerEntity) +

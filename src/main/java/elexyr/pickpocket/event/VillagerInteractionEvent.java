@@ -1,8 +1,11 @@
 package elexyr.pickpocket.event;
 
 import elexyr.pickpocket.Pickpocket;
+import elexyr.pickpocket.capability.pickpocket.CapabilityPickpocket;
+import elexyr.pickpocket.capability.pickpocket.IPickpocket;
 import elexyr.pickpocket.capability.pocketowner.CapabilityPocketOwner;
 import elexyr.pickpocket.capability.pocketowner.IPocketOwner;
+import elexyr.pickpocket.util.SkillUtils;
 import elexyr.pickpocket.util.VillagerUtils;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -25,12 +28,65 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Pickpocket.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class VillagerInteractionEvent {
 
+    @SubscribeEvent
+    public static void bedInteractionEvent(final PlayerInteractEvent.RightClickBlock event) {
+        World world = event.getWorld();
+        BlockState blockState = world.getBlockState(event.getPos());
+
+        if (blockState.getBlock() instanceof BedBlock) {
+
+        }
+        BlockPos headPos = event.getPos();
+        if (blockState.get(BedBlock.PART) == BedPart.FOOT) {
+            Direction direction = blockState.get(BedBlock.HORIZONTAL_FACING);
+            headPos = headPos.offset(direction);
+        }
+
+        List<VillagerEntity> sleepingVillagers = world.getEntitiesWithinAABB(VillagerEntity.class, new AxisAlignedBB(headPos), LivingEntity::isSleeping);
+        PlayerEntity player = event.getPlayer();
+        if (!sleepingVillagers.isEmpty() && player.isShiftKeyDown()) {
+            event.setResult(Event.Result.DENY);
+            if (world.isRemote) {
+                return;
+            }
+
+            VillagerEntity villagerEntity = sleepingVillagers.get(1);
+            List<ItemStack> sellingStacks = VillagerUtils.getSellingStacks(villagerEntity);
+            LazyOptional<IPickpocket> playerCapability = player.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY);
+
+
+            ArrayList<ItemStack> stolenStacks = new ArrayList<>();
+            for (ItemStack stack : sellingStacks) {
+                ItemStack stolenStack = SkillUtils.getStolenStack(player, stack, villagerEntity);
+                if (stolenStack.isEmpty()) {
+                    continue;
+                }
+                stolenStacks.add(stolenStack);
+                SkillUtils.updateSkillFromStack(playerCapability, stack);
+            }
+
+            //TODO: Replace it with readonly container
+            player.openContainer(new SimpleNamedContainerProvider(
+                    //Don't know what these parameters mean. From EnderChestTileEntity
+                    (p1, p2, p3) -> {
+                        ChestContainer container = ChestContainer.createGeneric9X2(p1, p2);
+                        //TODO: What if length of the list is bigger than container slots number - vanilla maximum amount of trades = 10
+                        container.setAll(stolenStacks);
+//                            Pickpocket.LOGGER.info("If chest container can interact with player: " + container.canInteractWith(event.getPlayer()));
+                        return container;
+                    },
+                    new TranslationTextComponent("container.villager_pocket")));
+        }
+    }
+
+    /*
     //TODO: Work out remote/not remote worlds. Rewrite in more orderly way
     @SubscribeEvent
     public static void bedVillagerStealEvent(final PlayerInteractEvent.RightClickBlock event) {
@@ -43,13 +99,11 @@ public class VillagerInteractionEvent {
         BlockState state = world.getBlockState(event.getPos());
         if (state.getBlock() instanceof BedBlock) {
 
-            /*
             if (!world.isRemote) {
                 event.setResult(Event.Result.DENY);
                 return;
             }
 
-             */
             BlockPos headPos = event.getPos();
             if (state.get(BedBlock.PART) == BedPart.FOOT) {
                 Direction direction = state.get(BedBlock.HORIZONTAL_FACING);
@@ -71,7 +125,6 @@ public class VillagerInteractionEvent {
                     stringBuilder.append(x.getCopyOfSellingStack().getItem().getName().getFormattedText()).append(", ");
                 });
                 stringBuilder.append("].");
-                */
                 checkCapability(villagerEntity, player);
 
                 List<ItemStack> villagerSellingStacks = VillagerUtils.getSellingStacks(villagerEntity);
@@ -105,4 +158,6 @@ public class VillagerInteractionEvent {
             Pickpocket.LOGGER.info("Villager hasn't this capability.");
         }
     }
+        */
+
 }
