@@ -54,20 +54,30 @@ public class SkillUtils {
     }
 
     public static ItemStack getStolenStack(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, ItemStack stack, VillagerEntity villagerEntity) {
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY.copy();
+        }
+
         float count = (float) ((float) stack.getCount() *
                                 (1 - Math.exp(1 /
                                         getRarityMultiplier(stack.getRarity()) * probabilityModifier(playerEntity, targetCap, villagerEntity) +
                                         RANDOM_AMOUNT_MODIFIER * RANDOM.nextFloat()
                                         )));
+        int intCount = (int) Math.floor(count);
+
+        if (intCount == 0) {
+            return ItemStack.EMPTY.copy();
+        }
+
         ItemStack copy = stack.copy();
-        copy.setCount(((int) Math.floor(count)));
+        copy.setCount((intCount));
         return copy;
     }
 
     private static float probabilityModifier(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, @Nullable VillagerEntity villagerEntity) {
 
         /* int size = playerEntity.inventory.getSizeInventory(); */
-
+        //TODO: write skill upgrade from rings
         float skill = 1;
 
         return Math.max(0,

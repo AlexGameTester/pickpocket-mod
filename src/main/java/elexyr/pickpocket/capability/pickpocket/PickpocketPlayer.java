@@ -30,14 +30,4 @@ public class PickpocketPlayer implements IPickpocket {
         skill += value;
     }
 
-    @Override
-    public void updateSkillsFromStolenStacks(List<ItemStack> stolenStacks) {
-        float skillToAdd = 0;
-        for (ItemStack stack: stolenStacks) {
-            if (!stack.isEmpty()) {
-                skillToAdd += IPickpocket.getSkillMultiplier(stack.getRarity(), skill) * stack.getCount();
-            }
-        }
-        addSkill(skillToAdd);
-    }
 }
