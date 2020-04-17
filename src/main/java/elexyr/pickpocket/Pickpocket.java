@@ -32,4 +32,8 @@ public class Pickpocket {
         CapabilityPocketOwner.register();
         CapabilityPickpocket.register();
     }
+
+    public static void debug(String msg) {
+        LOGGER.debug(msg);
+    }
 }

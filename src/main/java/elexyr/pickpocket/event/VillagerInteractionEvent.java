@@ -60,7 +60,9 @@ public class VillagerInteractionEvent {
             VillagerEntity villagerEntity = sleepingVillagers.get(1);
             List<ItemStack> sellingStacks = VillagerUtils.getSellingStacks(villagerEntity);
             LazyOptional<IPickpocket> playerCapability = player.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY);
-
+            LazyOptional<IPocketOwner> villagerCapability = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY);
+            playerCapability.ifPresent(cap -> Pickpocket.debug(String.format("Player's amount of skill is %f", cap.getSkill())));
+            Pickpocket.debug("Villger sells these stacks: " + sellingStacks);
 
             ArrayList<ItemStack> stolenStacks = new ArrayList<>();
             for (ItemStack stack : sellingStacks) {
@@ -71,6 +73,10 @@ public class VillagerInteractionEvent {
                 stolenStacks.add(stolenStack);
                 SkillUtils.updateSkillFromStack(playerCapability, stack);
             }
+            villagerCapability.ifPresent(IPocketOwner::addRobbery);
+
+
+            villagerCapability.ifPresent(cap -> Pickpocket.debug(String.format("Villager has %d robberies", cap.getRobberiesCount())));
 
             //TODO: Replace it with readonly container
             player.openContainer(new SimpleNamedContainerProvider(
