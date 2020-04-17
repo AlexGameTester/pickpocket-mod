@@ -40,8 +40,8 @@ public class VillagerInteractionEvent {
         World world = event.getWorld();
         BlockState blockState = world.getBlockState(event.getPos());
 
-        if (blockState.getBlock() instanceof BedBlock) {
-
+        if (!(blockState.getBlock() instanceof BedBlock)) {
+            return;
         }
         BlockPos headPos = event.getPos();
         if (blockState.get(BedBlock.PART) == BedPart.FOOT) {
