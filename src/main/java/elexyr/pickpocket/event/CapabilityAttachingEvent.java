@@ -1,14 +1,20 @@
 package elexyr.pickpocket.event;
 
 import elexyr.pickpocket.Pickpocket;
+import elexyr.pickpocket.capability.pickpocket.CapabilityPickpocket;
+import elexyr.pickpocket.capability.pickpocket.IPickpocket;
 import elexyr.pickpocket.capability.pickpocket.PickpocketPlayer;
+import elexyr.pickpocket.capability.pocketowner.CapabilityPocketOwner;
+import elexyr.pickpocket.capability.pocketowner.IPocketOwner;
 import elexyr.pickpocket.capability.pocketowner.VillagerPocketOwner;
+import elexyr.pickpocket.util.DefaultCapabilityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -23,27 +29,14 @@ public class CapabilityAttachingEvent {
 
     @SubscribeEvent
     public static void villagerCapabilitiesEventHandler(final AttachCapabilitiesEvent<Entity> event) {
-        Pickpocket.LOGGER.info("Attaching capability");
         if (event.getObject() instanceof VillagerEntity) {
-            event.addCapability(new ResourceLocation(Pickpocket.MODID, "pocket_owner_capability"),
-                    new ICapabilityProvider() {
-                        @Nonnull
-                        @Override
-                        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-                            return LazyOptional.of(VillagerPocketOwner::new).cast();
-                        }
-                    });
+            event.addCapability(new ResourceLocation(Pickpocket.MODID, "pocket_owner_capability_" + event.getObject().getCachedUniqueIdString()),
+                    new DefaultCapabilityProvider<IPocketOwner>(VillagerPocketOwner::new, CapabilityPocketOwner.POCKET_OWNER_CAPABILITY));
         }
 
-        if (event.getObject() instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation(Pickpocket.MODID, "pickpocket_capability"),
-                    new ICapabilityProvider() {
-                        @Nonnull
-                        @Override
-                        public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-                            return LazyOptional.of(PickpocketPlayer::new).cast();
-                        }
-            });
+        if (event.getObject() instanceof PlayerEntity && !event.getObject().getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY).isPresent()) {
+            event.addCapability(new ResourceLocation(Pickpocket.MODID, "pickpocket_capability_" + event.getObject().getCachedUniqueIdString()),
+                    new DefaultCapabilityProvider<IPickpocket>(PickpocketPlayer::new, CapabilityPickpocket.PICKPOCKET_CAPABILITY));
         }
     }
 }

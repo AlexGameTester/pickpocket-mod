@@ -6,12 +6,16 @@ import java.util.List;
 
 public class PickpocketPlayer implements IPickpocket {
 
-    private static final float MULTIPLIER = 1f;
-    private float skill = 1;
+    public PickpocketPlayer() {
+        //TODO: Debug only. Change to 1
+        this.skill = 100000f;
+    }
+
+    private float skill;
 
     @Override
     public float getSkill() {
-        return 0;
+        return skill;
     }
 
     @Override

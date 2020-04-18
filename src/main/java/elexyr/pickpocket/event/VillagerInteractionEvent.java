@@ -35,6 +35,8 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Pickpocket.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class VillagerInteractionEvent {
 
+    private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container.villager_pocket");
+
     @SubscribeEvent
     public static void bedInteractionEvent(final PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();
@@ -53,16 +55,17 @@ public class VillagerInteractionEvent {
         PlayerEntity player = event.getPlayer();
         if (!sleepingVillagers.isEmpty() && player.isShiftKeyDown()) {
             event.setResult(Event.Result.DENY);
+            event.setUseBlock(Event.Result.DENY);
             if (world.isRemote) {
                 return;
             }
 
-            VillagerEntity villagerEntity = sleepingVillagers.get(1);
+            VillagerEntity villagerEntity = sleepingVillagers.get(0);
             List<ItemStack> sellingStacks = VillagerUtils.getSellingStacks(villagerEntity);
             LazyOptional<IPickpocket> playerCapability = player.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY);
             LazyOptional<IPocketOwner> villagerCapability = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY);
-            playerCapability.ifPresent(cap -> Pickpocket.debug(String.format("Player's amount of skill is %f", cap.getSkill())));
-            Pickpocket.debug("Villger sells these stacks: " + sellingStacks);
+            playerCapability.ifPresent(cap -> Pickpocket.debug("Player's amount of skill is " + cap.getSkill()));
+            Pickpocket.debug("Villager sells these stacks: " + sellingStacks);
 
             ArrayList<ItemStack> stolenStacks = new ArrayList<>();
             for (ItemStack stack : sellingStacks) {
@@ -73,10 +76,9 @@ public class VillagerInteractionEvent {
                 stolenStacks.add(stolenStack);
                 SkillUtils.updateSkillFromStack(playerCapability, stack);
             }
-            villagerCapability.ifPresent(IPocketOwner::addRobbery);
-
-
             villagerCapability.ifPresent(cap -> Pickpocket.debug(String.format("Villager has %d robberies", cap.getRobberiesCount())));
+
+            villagerCapability.ifPresent(IPocketOwner::addRobbery);
 
             //TODO: Replace it with readonly container
             player.openContainer(new SimpleNamedContainerProvider(
@@ -88,12 +90,12 @@ public class VillagerInteractionEvent {
 //                            Pickpocket.LOGGER.info("If chest container can interact with player: " + container.canInteractWith(event.getPlayer()));
                         return container;
                     },
-                    new TranslationTextComponent("container.villager_pocket")));
+                    CONTAINER_NAME));
         }
     }
 
     /*
-    //TODO: Work out remote/not remote worlds. Rewrite in more orderly way
+
     @SubscribeEvent
     public static void bedVillagerStealEvent(final PlayerInteractEvent.RightClickBlock event) {
         World world = event.getWorld();

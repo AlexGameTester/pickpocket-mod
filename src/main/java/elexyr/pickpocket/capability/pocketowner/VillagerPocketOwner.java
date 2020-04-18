@@ -7,7 +7,11 @@ import java.util.List;
 
 public class VillagerPocketOwner implements IPocketOwner {
 
-    private int robberiesCount = 0;
+    private int robberiesCount;
+
+    public VillagerPocketOwner() {
+        this.robberiesCount = 0;
+    }
 
     @Override
     public int getRobberiesCount() {

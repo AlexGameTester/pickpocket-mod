@@ -1,6 +1,7 @@
 package elexyr.pickpocket.util;
 
 import elexyr.pickpocket.Pickpocket;
+import elexyr.pickpocket.capability.pickpocket.CapabilityPickpocket;
 import elexyr.pickpocket.capability.pickpocket.IPickpocket;
 import elexyr.pickpocket.capability.pocketowner.CapabilityPocketOwner;
 import elexyr.pickpocket.capability.pocketowner.IPocketOwner;
@@ -61,10 +62,11 @@ public class SkillUtils {
 
         LazyOptional<IPocketOwner> targetCap = villagerEntity.getCapability(CapabilityPocketOwner.POCKET_OWNER_CAPABILITY);
         float count = (float) ((float) stack.getCount() *
-                                (1 - Math.exp(1 /
-                                        getRarityMultiplier(stack.getRarity()) * probabilityModifier(playerEntity, targetCap, villagerEntity) +
-                                        RANDOM_AMOUNT_MODIFIER * RANDOM.nextFloat()
+                (1 - Math.exp((-1f) *
+                                (probabilityModifier(playerEntity, targetCap, villagerEntity) / getRarityMultiplier(stack.getRarity()) +
+                                    RANDOM_AMOUNT_MODIFIER * RANDOM.nextFloat())
                                         )));
+        Pickpocket.debug("Float count for " + stack + " is " + count);
         int intCount = (int) Math.floor(count);
 
         if (intCount == 0) {
@@ -72,18 +74,21 @@ public class SkillUtils {
         }
 
         ItemStack copy = stack.copy();
-        copy.setCount((intCount));
+        copy.setCount(intCount);
         return copy;
     }
 
+    //TODO: This name doesn't represents what function does
     private static float probabilityModifier(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, @Nullable VillagerEntity villagerEntity) {
 
         /* int size = playerEntity.inventory.getSizeInventory(); */
         //TODO: write skill upgrade from rings
-        float skill = 1;
+        float[] skill = {1};
+        //-1 removes default value. Default value is set in case if capability is empty for some reason
+        playerEntity.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY).ifPresent(cap -> skill[0] += -1 + cap.getSkill());
 
         return Math.max(0,
-                (-1f) * calculateVillagerAttentiveness(playerEntity, villagerEntity, targetCap) + skill);
+                (-1f) * calculateVillagerAttentiveness(playerEntity, villagerEntity, targetCap) + skill[0]);
     }
 
     private static float calculateVillagerAttentiveness(@Nonnull PlayerEntity player, @Nullable VillagerEntity villager, @Nonnull LazyOptional<IPocketOwner> capability) {
