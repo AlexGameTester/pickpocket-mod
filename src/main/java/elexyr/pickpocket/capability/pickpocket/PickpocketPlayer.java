@@ -6,12 +6,12 @@ import java.util.List;
 
 public class PickpocketPlayer implements IPickpocket {
 
+    private float skill;
+
     public PickpocketPlayer() {
         //TODO: Debug only. Change to 1
         this.skill = 100000f;
     }
-
-    private float skill;
 
     @Override
     public float getSkill() {
@@ -23,6 +23,8 @@ public class PickpocketPlayer implements IPickpocket {
         if (value < 0) {
             throw new IllegalArgumentException("Skill must be bigger than 0. Provided value " + value);
         }
+
+        skill = value;
     }
 
     @Override

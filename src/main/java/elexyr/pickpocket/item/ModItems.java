@@ -2,6 +2,8 @@ package elexyr.pickpocket.item;
 
 import elexyr.pickpocket.Pickpocket;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.util.ActionResultType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
