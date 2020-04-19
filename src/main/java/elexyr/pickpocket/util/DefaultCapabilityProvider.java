@@ -12,26 +12,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DefaultCapabilityProvider<K> implements ICapabilityProvider, INBTSerializable<INBT> {
-    @Override
-    public INBT serializeNBT() {
-        INBT[] nbt = {null};
-        capabilityInstance.ifPresent(cap -> nbt[0] = targetCap.writeNBT(cap, null));
-        return nbt[0];
-    }
-
-    @Override
-    public void deserializeNBT(INBT nbt) {
-        capabilityInstance.ifPresent(cap -> targetCap.readNBT(cap, null, nbt));
-    }
-
     protected LazyOptional<K> capabilityInstance;
-    private Capability targetCap;
+
+    private Capability<K> targetCap;
 
     public DefaultCapabilityProvider(NonNullSupplier<K> supplier, Capability<K> targetCap) {
         this.capabilityInstance = LazyOptional.of(supplier);
         this.targetCap = targetCap;
     }
-
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
@@ -44,5 +32,17 @@ public class DefaultCapabilityProvider<K> implements ICapabilityProvider, INBTSe
 
     public LazyOptional<K> getCapability() {
         return capabilityInstance;
+    }
+
+    @Override
+    public INBT serializeNBT() {
+        INBT[] nbt = {null};
+        capabilityInstance.ifPresent(cap -> nbt[0] = targetCap.writeNBT(cap, null));
+        return nbt[0];
+    }
+
+    @Override
+    public void deserializeNBT(INBT nbt) {
+        capabilityInstance.ifPresent(cap -> targetCap.readNBT(cap, null, nbt));
     }
 }
