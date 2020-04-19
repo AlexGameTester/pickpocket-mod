@@ -5,9 +5,11 @@ import elexyr.pickpocket.capability.pickpocket.CapabilityPickpocket;
 import elexyr.pickpocket.capability.pickpocket.IPickpocket;
 import elexyr.pickpocket.capability.pocketowner.CapabilityPocketOwner;
 import elexyr.pickpocket.capability.pocketowner.IPocketOwner;
+import elexyr.pickpocket.item.IPickpocketSkillModifier;
 import net.minecraft.entity.merchant.villager.VillagerData;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraftforge.common.util.LazyOptional;
@@ -80,12 +82,21 @@ public class SkillUtils {
 
     //TODO: This name doesn't represents what function does
     private static float probabilityModifier(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, @Nullable VillagerEntity villagerEntity) {
-
-        /* int size = playerEntity.inventory.getSizeInventory(); */
-        //TODO: write skill upgrade from rings
+        LazyOptional<IPickpocket> playerCapability = playerEntity.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY);
         float[] skill = {1};
+        int size = playerEntity.inventory.getSizeInventory();
+        for (int i = 0; i < size; i++) {
+            ItemStack stack = playerEntity.inventory.getStackInSlot(i);
+            Item item = stack.getItem();
+            if (item instanceof IPickpocketSkillModifier) {
+                skill[0] += ((IPickpocketSkillModifier) item).getSkillIncrease(playerCapability);
+                ((IPickpocketSkillModifier) item).onUsed(stack, playerCapability);
+                break;
+            }
+        }
+        //TODO: write skill upgrade from rings
         //-1 removes default value. Default value is set in case if capability is empty for some reason
-        playerEntity.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY).ifPresent(cap -> skill[0] += -1 + cap.getSkill());
+        playerCapability.ifPresent(cap -> skill[0] += -1 + cap.getSkill());
 
         return Math.max(0,
                 (-1f) * calculateVillagerAttentiveness(playerEntity, villagerEntity, targetCap) + skill[0]);
