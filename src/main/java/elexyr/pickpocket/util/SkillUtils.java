@@ -84,6 +84,7 @@ public class SkillUtils {
     private static float probabilityModifier(PlayerEntity playerEntity, LazyOptional<IPocketOwner> targetCap, @Nullable VillagerEntity villagerEntity) {
         LazyOptional<IPickpocket> playerCapability = playerEntity.getCapability(CapabilityPickpocket.PICKPOCKET_CAPABILITY);
         float[] skill = {1};
+        //TODO: Add curios compat
         int size = playerEntity.inventory.getSizeInventory();
         for (int i = 0; i < size; i++) {
             ItemStack stack = playerEntity.inventory.getStackInSlot(i);
@@ -94,9 +95,9 @@ public class SkillUtils {
                 break;
             }
         }
-        //TODO: write skill upgrade from rings
+
         //-1 removes default value. Default value is set in case if capability is empty for some reason
-        playerCapability.ifPresent(cap -> skill[0] += -1 + cap.getSkill());
+        playerCapability.ifPresent(cap -> skill[0] += -1f + cap.getSkill());
 
         return Math.max(0,
                 (-1f) * calculateVillagerAttentiveness(playerEntity, villagerEntity, targetCap) + skill[0]);

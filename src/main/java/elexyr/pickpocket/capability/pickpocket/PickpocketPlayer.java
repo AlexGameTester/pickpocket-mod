@@ -9,8 +9,7 @@ public class PickpocketPlayer implements IPickpocket {
     private float skill;
 
     public PickpocketPlayer() {
-        //TODO: Debug only. Change to 1
-        this.skill = 100000f;
+        this.skill = 1f;
     }
 
     @Override
